@@ -21,11 +21,15 @@ class QuoteViewController: UIViewController {
         AF.request("https://api.forismatic.com/api/1.0/?method=getQuote&key=457653&format=json&lang=en").responseData { [self] response in
             if let data = response.value {
                 let quote = try? JSONDecoder().decode (Quote.self, from: data)
-                quoteLabel.text = quote?.quoteText
+                
+                DispatchQueue.main.async {
+                    quoteLabel.text = quote?.quoteText
+                }
+                
             }
     
         }
-//
+        
                         let animationToShow = Animation.named("01")
                         pulsatingAnimation.animation = animationToShow
 
